@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ÆonCore Digital Distribution (ÆonCore DnD) — Sovereign Media Architecture</title>
-  <meta name="description" content="Enterprise-grade digital distribution, direct DDEX ERN ingestion, and decentralized provenance for sovereign music labels and digital media catalogs.">
+  <meta name="description" content="Next-generation sovereign media architecture, direct DDEX ERN 4.3 ingestion, lossless master distribution, and real-time corporate treasury clearing.">
   <link rel="icon" type="image/jpeg" href="aeoncore_dnd_primary_lunar_carbon.jpg">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Space Grotesk, Syne, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,19 +23,48 @@
       theme: {
         extend: {
           colors: {
-            carbon: '#07080a',
-            surface: '#0f1115',
-            panel: '#15181e',
-            border: '#232731',
+            carbon: '#060709',
+            obsidian: '#0a0d12',
+            surface: '#10141c',
+            panel: '#151b26',
+            border: '#232c3d',
+            'border-glow': 'rgba(255, 85, 0, 0.4)',
             ember: '#ff5500',
-            'ember-glow': 'rgba(255, 85, 0, 0.35)',
-            titanium: '#d4d4d8',
-            muted: '#8e929e'
+            'ember-light': '#ff7a1a',
+            cyan: '#00f5d4',
+            violet: '#9d4edd',
+            titanium: '#e2e8f0'
           },
           fontFamily: {
             sans: ['"DM Sans"', 'sans-serif'],
             display: ['"Space Grotesk"', 'sans-serif'],
+            syne: ['"Syne"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace']
+          },
+          animation: {
+            'spin-slow': 'spin 18s linear infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+            'flow-beam': 'flowBeam 3s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'marquee': 'marquee 25s linear infinite'
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4', filter: 'blur(30px)' },
+              '50%': { opacity: '0.8', filter: 'blur(45px)' }
+            },
+            flowBeam: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(200%)' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
           }
         }
       }
@@ -41,566 +73,1164 @@
 
   <style>
     body {
-      background-color: #07080a;
-      color: #e4e4e7;
+      background-color: #060709;
+      color: #e2e8f0;
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
     }
-    .grid-bg {
-      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+
+    /* Ambient animated lighting */
+    .glow-ember {
+      background: radial-gradient(circle, rgba(255,85,0,0.22) 0%, rgba(255,85,0,0) 70%);
     }
-    .ember-glow-box {
-      box-shadow: 0 0 35px -5px rgba(255, 85, 0, 0.25);
+    .glow-cyan {
+      background: radial-gradient(circle, rgba(0,245,212,0.15) 0%, rgba(0,245,212,0) 70%);
     }
-    .ember-text-glow {
-      text-shadow: 0 0 20px rgba(255, 85, 0, 0.6);
+    .glow-violet {
+      background: radial-gradient(circle, rgba(157,78,221,0.18) 0%, rgba(157,78,221,0) 70%);
     }
-    @keyframes pulse-wave {
-      0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 4px #ff5500); }
-      50% { opacity: 1; filter: drop-shadow(0 0 12px #ff7700); }
+
+    /* Interactive Holographic Vinyl */
+    .vinyl-record {
+      background: radial-gradient(circle at center, 
+        #2a2a2e 0%, 
+        #111114 12%, 
+        #1d1d21 13%, 
+        #0b0b0d 24%, 
+        #1c1c20 25%, 
+        #0a0a0c 38%, 
+        #19191d 39%, 
+        #08080a 52%, 
+        #18181c 53%, 
+        #060608 70%);
+      box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 20px rgba(255,255,255,0.06);
     }
-    .animate-waveform {
-      animation: pulse-wave 2.5s infinite ease-in-out;
+    .vinyl-sheen {
+      background: linear-gradient(45deg, 
+        transparent 35%, 
+        rgba(255,255,255,0.09) 45%, 
+        rgba(255,85,0,0.15) 50%, 
+        rgba(255,255,255,0.09) 55%, 
+        transparent 65%);
     }
-    @keyframes scanline {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(1000%); }
+
+    /* Glass Panels */
+    .glass-card {
+      background: rgba(16, 20, 28, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .scanline {
-      animation: scanline 8s linear infinite;
+    .glass-card:hover {
+      border-color: rgba(255, 85, 0, 0.45);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 16px 40px -10px rgba(255, 85, 0, 0.18);
+    }
+
+    /* Sound Visualizer Bars */
+    .visualizer-bar {
+      transition: height 0.08s ease;
+    }
+
+    /* Grid lines */
+    .cyber-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Glowing Text Gradient */
+    .gradient-text-ember {
+      background: linear-gradient(135deg, #ffffff 0%, #ff8c42 50%, #ff5500 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-cyan {
+      background: linear-gradient(135deg, #ffffff 20%, #00f5d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
-<body class="bg-carbon text-zinc-200 antialiased selection:bg-ember selection:text-white">
+<body class="bg-carbon text-zinc-200 antialiased selection:bg-ember selection:text-white relative">
 
-  <!-- Top Telemetry Stream -->
-  <div class="border-b border-border/80 bg-surface/90 px-4 py-1.5 text-xs font-mono text-zinc-400 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between overflow-x-auto whitespace-nowrap gap-6">
-      <div class="flex items-center gap-2">
-        <span class="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span class="font-bold text-zinc-200">NODE STATUS:</span>
-        <span class="text-emerald-400 font-semibold">ONLINE</span>
-      </div>
-      <div class="flex items-center gap-6">
-        <span>ENGINE: <strong class="text-zinc-200">DDEX ERN 4.3 XML</strong></span>
-        <span>GLOBAL DSPS: <strong class="text-zinc-200">150+ CONNECTED</strong></span>
-        <span>ISRC REGISTRY: <strong class="text-ember">US-AON / US-FRS</strong></span>
-        <span>TREASURY CLEARING: <strong class="text-zinc-200">RHO / WEBSTER BANK</strong></span>
-        <span>COMMISSION: <strong class="text-emerald-400 font-bold">0.00%</strong></span>
-      </div>
-      <div class="hidden md:block text-[11px] text-zinc-500">
-        EVMG ENTERPRISES LLC • SOVEREIGN PIPELINE
-      </div>
-    </div>
-  </div>
+  <!-- Interactive Background Canvas (Audio Waves & Fluid Particle Mesh) -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-  <!-- Global Navigation -->
-  <header class="sticky top-0 z-50 border-b border-border/60 bg-carbon/90 backdrop-blur-xl">
-    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-      
-      <!-- Logo Branding -->
-      <a href="#" class="flex items-center gap-3.5 group">
-        <div class="relative flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-surface p-1.5 transition-all group-hover:border-ember group-hover:shadow-[0_0_20px_rgba(255,85,0,0.3)]">
-          <!-- Architectural Outline AC Monogram SVG -->
-          <svg viewBox="0 0 100 100" class="h-full w-full">
-            <!-- Outlined A & C Glyphs -->
-            <path d="M 45,15 L 20,85 L 32,85 L 38,68 L 52,68 L 58,85 L 70,85 L 45,15 Z M 45,35 L 50,56 L 40,56 Z" fill="none" stroke="#d4d4d8" stroke-width="5" stroke-linejoin="miter"/>
-            <path d="M 50,25 L 85,25 L 85,38 L 62,38 L 62,62 L 85,62 L 85,75 L 50,75 Z" fill="none" stroke="#a1a1aa" stroke-width="5" stroke-linejoin="miter"/>
-            <!-- Razor Ember Waveform slicing through crossbar -->
-            <path d="M 5,60 L 30,60 L 35,48 L 40,72 L 45,38 L 50,82 L 55,42 L 60,70 L 65,54 L 70,62 L 95,60" fill="none" stroke="#ff5500" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" class="animate-waveform"/>
-          </svg>
-        </div>
-        <div>
-          <div class="font-display text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-            <span>ÆONCORE</span>
-            <span class="rounded bg-ember/15 px-1.5 py-0.5 text-[10px] font-mono font-bold text-ember border border-ember/30">DnD</span>
-          </div>
-          <div class="font-mono text-[9px] tracking-[0.25em] text-zinc-400 uppercase">
-            Digital Distribution
-          </div>
-        </div>
-      </a>
+  <!-- Ambient Glowing Orbs -->
+  <div class="fixed top-[-100px] left-[15%] w-[600px] h-[600px] glow-ember rounded-full pointer-events-none z-0 animate-pulse-glow"></div>
+  <div class="fixed top-[40%] right-[-100px] w-[650px] h-[650px] glow-cyan rounded-full pointer-events-none z-0 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+  <div class="fixed bottom-[-150px] left-[30%] w-[700px] h-[700px] glow-violet rounded-full pointer-events-none z-0 animate-pulse-glow" style="animation-delay: 2.5s;"></div>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
-        <a href="#architecture" class="hover:text-ember transition-colors">Architecture</a>
-        <a href="#pipeline" class="hover:text-ember transition-colors">Direct Pipeline</a>
-        <a href="#dsp-network" class="hover:text-ember transition-colors">DSP Network</a>
-        <a href="#frsw" class="hover:text-ember transition-colors">Fr.SW Catalog</a>
-        <a href="#aeonwave" class="hover:text-ember transition-colors">ÆonWave</a>
-        <a href="#economics" class="hover:text-ember transition-colors">The Inversion</a>
-      </nav>
+  <!-- Main App Shell -->
+  <div class="relative z-10 flex flex-col min-h-screen">
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="#catalog-docket" class="hidden sm:inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-xs font-mono font-medium text-zinc-200 hover:border-ember hover:text-white transition-all">
-          ISRC & UPC Docket
-        </a>
-        <a href="#onboard" class="inline-flex items-center justify-center rounded-md bg-ember px-4 py-2 text-xs font-mono font-bold text-white shadow-lg shadow-ember/20 hover:bg-ember/90 hover:shadow-ember/40 transition-all">
-          Deploy Catalog →
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="relative overflow-hidden pt-16 pb-24 grid-bg border-b border-border/60">
-    <!-- Ambient Radial Glow -->
-    <div class="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[550px] w-[550px] rounded-full bg-ember/10 blur-[130px]"></div>
-
-    <div class="mx-auto max-w-7xl px-6 relative z-10">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+    <!-- Top Telemetry Stream & Sound Status -->
+    <div class="border-b border-border/80 bg-obsidian/90 px-4 py-2 text-xs font-mono text-zinc-400 backdrop-blur-md">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
         
-        <!-- Left Hero Copy -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3.5 py-1 text-xs font-mono text-zinc-300">
-            <span class="h-1.5 w-1.5 rounded-full bg-ember"></span>
-            <span>SOVEREIGN MEDIA INFRASTRUCTURE • NO MIDDLEMEN</span>
-          </div>
-
-          <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08]">
-            Distribute directly.<br>
-            Settle in <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember via-orange-400 to-amber-200 ember-text-glow">real-time.</span>
-          </h1>
-
-          <p class="text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed">
-            Eliminate legacy aggregator fees, 90-day royalty escrow holds, and bureaucratic bot delays. ÆonCore DnD combines direct DDEX ERN 4.3 delivery to 150+ global DSPs with cryptographic asset provenance and automated corporate treasury clearing.
-          </p>
-
-          <div class="flex flex-wrap gap-4 pt-4 font-mono text-xs">
-            <a href="#onboard" class="inline-flex items-center justify-center rounded-lg bg-ember px-6 py-3.5 font-bold text-white shadow-lg shadow-ember/30 hover:bg-ember/90 transition-all gap-2">
-              <span>Onboard Master Catalog</span>
-              <span>→</span>
-            </a>
-            <a href="#architecture" class="inline-flex items-center justify-center rounded-lg border border-border bg-panel px-6 py-3.5 font-medium text-zinc-200 hover:border-zinc-400 hover:bg-surface transition-all">
-              Inspect Architecture
-            </a>
-          </div>
-
-          <!-- Feature Bullets -->
-          <div class="pt-6 grid sm:grid-cols-3 gap-4 border-t border-border/80 text-xs font-mono">
-            <div>
-              <div class="text-ember font-bold text-lg">0.00%</div>
-              <div class="text-zinc-400">Distributor Cut Taken</div>
-            </div>
-            <div>
-              <div class="text-zinc-100 font-bold text-lg">Instant</div>
-              <div class="text-zinc-400">Direct Treasury Payouts</div>
-            </div>
-            <div>
-              <div class="text-zinc-100 font-bold text-lg">C2PA / SHA-256</div>
-              <div class="text-zinc-400">Cryptographic Provenance</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Visual: Ingestion Terminal Simulator -->
-        <div class="lg:col-span-5">
-          <div class="rounded-2xl border border-border bg-surface p-1 shadow-2xl ember-glow-box overflow-hidden">
-            <!-- Terminal Header -->
-            <div class="flex items-center justify-between border-b border-border/80 bg-panel px-4 py-3 text-xs font-mono">
-              <div class="flex items-center gap-2">
-                <div class="h-2.5 w-2.5 rounded-full bg-red-500/80"></div>
-                <div class="h-2.5 w-2.5 rounded-full bg-yellow-500/80"></div>
-                <div class="h-2.5 w-2.5 rounded-full bg-green-500/80"></div>
-                <span class="ml-2 text-zinc-400">aeoncore-ingest-node::ern43</span>
-              </div>
-              <span class="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400 font-bold border border-emerald-500/20">LIVE</span>
-            </div>
-
-            <!-- Terminal Code Feed -->
-            <div class="p-5 font-mono text-[11px] leading-relaxed space-y-3 bg-carbon/90 text-zinc-300">
-              <div class="text-zinc-500">// Sovereign Release Packet: US-FRS-26</div>
-              <div>
-                <span class="text-ember">RELEASE_ID:</span> <span class="text-white">"QuietWave Series Vol. 1"</span><br>
-                <span class="text-ember">CATALOG_UPC:</span> <span class="text-white">FRS-QWV1-LP</span><br>
-                <span class="text-ember">ISRC_ROOT:</span> <span class="text-white">US-FRS-26-XXXXX</span><br>
-                <span class="text-ember">DPID_ISSUER:</span> <span class="text-emerald-400">PADPIDA-AONCORE</span>
-              </div>
-
-              <div class="p-3 rounded bg-panel/80 border border-border/80 space-y-1.5">
-                <div class="text-zinc-400 text-[10px] uppercase font-bold tracking-wider">Cryptographic Hash Verification</div>
-                <div class="text-[10px] text-zinc-300 break-all">
-                  SHA-256: 8a71c9b2e04f9812df7183e8fa91...
-                </div>
-                <div class="text-[10px] text-amber-400">
-                  CID: bafybeic94f71a082... (IPFS Immutable)
-                </div>
-              </div>
-
-              <!-- Dispatch Indicators -->
-              <div class="pt-2 space-y-2">
-                <div class="text-[10px] text-zinc-400 uppercase font-bold">Direct Dispatch Targets:</div>
-                <div class="grid grid-cols-2 gap-2 text-[10px]">
-                  <div class="p-2 rounded bg-surface border border-emerald-500/30 flex items-center justify-between">
-                    <span>Spotify Feed</span>
-                    <span class="text-emerald-400">✓ DELIVERED</span>
-                  </div>
-                  <div class="p-2 rounded bg-surface border border-emerald-500/30 flex items-center justify-between">
-                    <span>Apple Music</span>
-                    <span class="text-emerald-400">✓ DELIVERED</span>
-                  </div>
-                  <div class="p-2 rounded bg-surface border border-emerald-500/30 flex items-center justify-between">
-                    <span>YouTube CMS</span>
-                    <span class="text-emerald-400">✓ CONTENT ID</span>
-                  </div>
-                  <div class="p-2 rounded bg-surface border border-ember/40 flex items-center justify-between">
-                    <span>ÆonWave Player</span>
-                    <span class="text-ember">✓ LOSSLESS HLS</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="pt-2 text-emerald-400 text-[10px]">
-                ▸ Direct bank settlement routing to Webster/Rho Corporate Treasury active.
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- The 4 Sovereign Pillars (Architecture Section) -->
-  <section id="architecture" class="py-24 border-b border-border/60 bg-surface/40">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-ember font-mono text-xs uppercase tracking-widest">Sovereignty In Practice</span>
-        <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2 mb-4">
-          Built for the Post-Middleman Era
-        </h2>
-        <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">
-          Traditional music distributors function as tollbooths: they sit between you and DSPs, charge annual fees per release, hold your money, and put their name on your metadata. ÆonCore DnD gives you your own key.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Pillar 1 -->
-        <div class="rounded-xl border border-border bg-panel/70 p-6 flex flex-col justify-between hover:border-ember/60 transition-all group">
-          <div>
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-surface border border-border text-ember font-mono font-bold text-xl mb-5 group-hover:scale-105 transition-transform">
-              01
-            </div>
-            <h3 class="font-display text-xl font-bold text-white mb-2">Direct DDEX Pipe</h3>
-            <p class="text-sm text-zinc-400 leading-relaxed">
-              Standardized XML Electronic Release Notification (ERN 4.3). Delivers master audio directly to Spotify, Apple, and DSP ingestion nodes with your DPID on file.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-border/60 text-xs font-mono text-ember font-semibold">
-            Bypasses Third-Party Aggregators →
-          </div>
-        </div>
-
-        <!-- Pillar 2 -->
-        <div class="rounded-xl border border-border bg-panel/70 p-6 flex flex-col justify-between hover:border-ember/60 transition-all group">
-          <div>
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-surface border border-border text-ember font-mono font-bold text-xl mb-5 group-hover:scale-105 transition-transform">
-              02
-            </div>
-            <h3 class="font-display text-xl font-bold text-white mb-2">Cryptographic Provenance</h3>
-            <p class="text-sm text-zinc-400 leading-relaxed">
-              Replace the legacy $750 barcode cartel with immutable Content-Addressable Hashes (SHA-256 + IPFS CIDs) and C2PA metadata embedded permanently into audio masters.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-border/60 text-xs font-mono text-ember font-semibold">
-            Tamper-Proof Ownership Record →
-          </div>
-        </div>
-
-        <!-- Pillar 3 -->
-        <div class="rounded-xl border border-border bg-panel/70 p-6 flex flex-col justify-between hover:border-ember/60 transition-all group">
-          <div>
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-surface border border-border text-ember font-mono font-bold text-xl mb-5 group-hover:scale-105 transition-transform">
-              03
-            </div>
-            <h3 class="font-display text-xl font-bold text-white mb-2">In-House ISRC Minting</h3>
-            <p class="text-sm text-zinc-400 leading-relaxed">
-              Direct RIAA registrant authority under <code class="text-zinc-200">US-AON</code> and <code class="text-zinc-200">US-FRS</code>. Mint up to 100,000 ISRC track codes per year for life with zero per-track fees.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-border/60 text-xs font-mono text-ember font-semibold">
-            100,000 Free Codes / Year →
-          </div>
-        </div>
-
-        <!-- Pillar 4 -->
-        <div class="rounded-xl border border-border bg-panel/70 p-6 flex flex-col justify-between hover:border-ember/60 transition-all group">
-          <div>
-            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-surface border border-border text-ember font-mono font-bold text-xl mb-5 group-hover:scale-105 transition-transform">
-              04
-            </div>
-            <h3 class="font-display text-xl font-bold text-white mb-2">Direct Treasury Clearing</h3>
-            <p class="text-sm text-zinc-400 leading-relaxed">
-              Zero escrow delay. Streaming payouts and direct-to-consumer digital vinyl/stem purchases clear automatically into your Webster Bank / Rho Corporate Treasury account.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-border/60 text-xs font-mono text-ember font-semibold">
-            0% Middleman Payout Skim →
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Global DSP Network Matrix -->
-  <section id="dsp-network" class="py-24 border-b border-border/60 bg-carbon">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-          <span class="text-ember font-mono text-xs uppercase tracking-widest">Global Reach</span>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-1">Direct Ingestion DSP Network</h2>
-        </div>
-        <p class="text-zinc-400 text-sm max-w-md font-mono">
-          Full ingestion across every tier-one streaming DSP, social audio library, and specialized audiophile portal.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        
-        <!-- DSP Cards -->
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Spotify</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Content Provider Feed</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Apple Music</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Transporter XML Direct</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">YouTube Music</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Content ID & CMS</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">TIDAL</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">HiFi Master Delivery</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Amazon Music</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">HD / Ultra HD Ingestion</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Qobuz</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Studio 24-bit Hi-Res</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Beatport</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Club & Electronic</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Deezer</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">FLAC Global Catalog</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Bandcamp</div>
-          <div class="text-[10px] font-mono text-ember mt-1">Direct Lossless & Stems</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Audiomack</div>
-          <div class="text-[10px] font-mono text-emerald-400 mt-1">Mixtape & Release Hub</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-white">Audius</div>
-          <div class="text-[10px] font-mono text-purple-400 mt-1">Decentralized Solana</div>
-        </div>
-        <div class="p-5 rounded-lg border border-border bg-surface text-center hover:border-ember transition-colors">
-          <div class="font-display font-bold text-lg text-ember">ÆonWave</div>
-          <div class="text-[10px] font-mono text-ember mt-1">Proprietary Mobile Node</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Flagship Label Showcase (Fr. Sandtown-Winchester) -->
-  <section id="frsw" class="py-24 border-b border-border/60 bg-surface/50">
-    <div class="mx-auto max-w-7xl px-6">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <div class="lg:col-span-5 space-y-5">
-          <span class="rounded bg-ember/15 px-2 py-1 text-xs font-mono font-bold text-ember border border-ember/30">
-            FLAGSHIP IMPRINT POWERED BY ÆONCORE
+        <!-- Live Ingestion Status -->
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
           </span>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">
-            Fr. Sandtown-Winchester
+          <span class="font-bold text-white tracking-wider">ÆON-CORE NODE 01:</span>
+          <span class="text-emerald-400 font-semibold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">DDEX ERN 4.3 LIVE</span>
+        </div>
+
+        <!-- Middle Telemetry Stats -->
+        <div class="hidden md:flex items-center gap-6 text-[11px]">
+          <span>GLOBAL DSPS: <strong class="text-white">150+ PIPES ACTIVE</strong></span>
+          <span>ISRC ALLOCATION: <strong class="text-ember font-bold">US-FRS / US-AON</strong></span>
+          <span>TREASURY: <strong class="text-white">WEBSTER / RHO INSTANT</strong></span>
+          <span>DISTRIBUTOR TOLL: <strong class="text-emerald-400 font-bold">0.00%</strong></span>
+        </div>
+
+        <!-- Master Sound Generator Toggle -->
+        <div class="flex items-center gap-3">
+          <button id="sound-btn" onclick="toggleAudio()" class="flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-mono text-zinc-300 hover:border-ember hover:text-white transition-all shadow-md">
+            <span id="sound-icon" class="text-ember"><i data-lucide="volume-2" class="w-3.5 h-3.5"></i></span>
+            <span id="sound-label">SOUND FX: ON</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Header -->
+    <header class="sticky top-0 z-50 border-b border-border/60 bg-carbon/80 backdrop-blur-2xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        
+        <!-- Brand Identity -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="relative flex h-11 w-11 items-center justify-center rounded-xl bg-surface border border-ember/40 shadow-lg shadow-ember/15 group-hover:border-ember transition-all overflow-hidden">
+            <img src="aeoncore_dnd_primary_lunar_carbon.jpg" alt="ÆonCore Logo" class="h-9 w-9 object-contain group-hover:scale-110 transition-transform duration-300">
+            <div class="absolute inset-0 bg-gradient-to-tr from-ember/20 to-transparent pointer-events-none"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-syne text-lg font-bold tracking-wider text-white">ÆONCORE</span>
+              <span class="rounded bg-ember/20 px-1.5 py-0.5 text-[10px] font-mono font-bold text-ember border border-ember/30">DnD</span>
+            </div>
+            <div class="text-[10px] font-mono tracking-widest text-zinc-400">DIGITAL DISTRIBUTION</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-zinc-300">
+          <a href="#pipeline" class="hover:text-ember transition-colors flex items-center gap-1.5">
+            <i data-lucide="cpu" class="w-4 h-4 text-ember"></i> Direct Pipeline
+          </a>
+          <a href="#station" class="hover:text-ember transition-colors flex items-center gap-1.5">
+            <i data-lucide="disc" class="w-4 h-4 text-cyan"></i> Sonic Station
+          </a>
+          <a href="#roster" class="hover:text-ember transition-colors flex items-center gap-1.5">
+            <i data-lucide="users" class="w-4 h-4 text-violet"></i> Fr.SW Roster
+          </a>
+          <a href="#inversion" class="hover:text-ember transition-colors flex items-center gap-1.5">
+            <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i> The Inversion
+          </a>
+          <a href="#docket" class="hover:text-ember transition-colors flex items-center gap-1.5">
+            <i data-lucide="file-check-2" class="w-4 h-4 text-amber-400"></i> ISRC Manifest
+          </a>
+        </nav>
+
+        <!-- CTA & Portal Link -->
+        <div class="flex items-center gap-3">
+          <a href="https://frsw.media" target="_blank" class="hidden sm:flex items-center gap-2 rounded-xl border border-border bg-surface/80 px-4 py-2 text-xs font-mono text-zinc-300 hover:border-zinc-500 hover:text-white transition-all">
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-zinc-400"></i>
+            <span>frsw.media</span>
+          </a>
+          <a href="#onboard" class="relative group overflow-hidden rounded-xl bg-gradient-to-r from-ember via-ember-light to-amber-500 p-[1px] shadow-lg shadow-ember/20 hover:shadow-ember/40 transition-all">
+            <div class="rounded-[11px] bg-carbon px-5 py-2.5 text-xs font-bold font-display uppercase tracking-wider text-white group-hover:bg-transparent transition-colors flex items-center gap-2">
+              <span>Deploy Catalog</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Marquee Banner: Live Pipeline Routing -->
+    <div class="relative overflow-hidden border-b border-border/40 bg-obsidian py-2.5 font-mono text-[11px] text-zinc-400">
+      <div class="flex whitespace-nowrap animate-marquee">
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-cyan"></span> SPOTIFY DIRECT FEED: ERN 4.3 DISPATCH VERIFIED</span>
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-ember"></span> APPLE MUSIC ALAC LOSSLESS INGEST: ACTIVE</span>
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-violet"></span> TIDAL 24-BIT/96KHZ MASTER PIPE: CONNECTED</span>
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> YOUTUBE CMS CONTENT ID: REAL-TIME MATCHING</span>
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-cyan"></span> ÆONWAVE MOBILE AUDIOPHILE CLIENT: HLS CACHED</span>
+        <span class="mx-6 flex items-center gap-2 text-zinc-300"><span class="h-1.5 w-1.5 rounded-full bg-ember"></span> CORPORATE TREASURY CLEARING: 0.00% MIDDLEMAN CUT</span>
+      </div>
+    </div>
+
+    <!-- HERO SECTION: Kinetic, Alive, Multi-Dimensional -->
+    <section id="hero" class="relative pt-16 pb-24 lg:pt-28 lg:pb-36 cyber-grid">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Column: Vision & Authority -->
+          <div class="lg:col-span-7 space-y-8">
+            
+            <!-- Ingestion Badge -->
+            <div class="inline-flex items-center gap-3 rounded-full border border-ember/30 bg-surface/90 px-4 py-1.5 text-xs font-mono backdrop-blur-xl shadow-lg shadow-ember/10">
+              <span class="h-2 w-2 rounded-full bg-ember animate-pulse"></span>
+              <span class="text-zinc-300">SOVEREIGN MEDIA INFRASTRUCTURE</span>
+              <span class="text-zinc-600">•</span>
+              <span class="text-ember font-bold">ZERO MIDDLEMEN</span>
+            </div>
+
+            <!-- Massive Headline -->
+            <h1 class="font-syne text-5xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+              Distribute directly.<br>
+              Settle in <span class="gradient-text-ember">real-time.</span>
+            </h1>
+
+            <p class="text-lg text-zinc-400 max-w-2xl font-light leading-relaxed">
+              Eliminate legacy aggregator fees, 90-day royalty escrow holds, and bureaucratic bot gatekeepers. 
+              <strong class="text-white font-medium">ÆonCore DnD</strong> delivers direct DDEX ERN 4.3 XML release feeds to 150+ global DSPs with cryptographic asset provenance and automated corporate treasury clearing.
+            </p>
+
+            <!-- Action Cluster -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="#onboard" class="rounded-xl bg-ember px-7 py-3.5 font-display font-bold text-white shadow-xl shadow-ember/25 hover:bg-ember-light hover:shadow-ember/40 hover:-translate-y-0.5 transition-all flex items-center gap-2.5">
+                <span>Onboard Master Catalog</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+
+              <a href="#station" class="rounded-xl border border-border bg-surface/80 px-7 py-3.5 font-display font-bold text-zinc-200 hover:border-cyan hover:text-cyan hover:-translate-y-0.5 transition-all flex items-center gap-2.5">
+                <i data-lucide="play-circle" class="w-4 h-4 text-cyan"></i>
+                <span>Launch Sonic Station</span>
+              </a>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="grid grid-cols-3 gap-6 pt-6 border-t border-border/60 font-mono">
+              <div>
+                <div class="text-3xl font-bold font-display text-white">0.00%</div>
+                <div class="text-xs text-zinc-500 uppercase tracking-wider mt-1">Distributor Cut</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold font-display text-cyan">Instant</div>
+                <div class="text-xs text-zinc-500 uppercase tracking-wider mt-1">Treasury Payouts</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold font-display text-ember">C2PA / SHA-256</div>
+                <div class="text-xs text-zinc-500 uppercase tracking-wider mt-1">Immutable Provenance</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Live Dispatch Matrix Terminal -->
+          <div class="lg:col-span-5">
+            <div class="relative glass-card rounded-2xl p-6 shadow-2xl border-border/80 overflow-hidden">
+              
+              <!-- Terminal Header -->
+              <div class="flex items-center justify-between border-b border-border/80 pb-4 mb-5 font-mono text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="h-3 w-3 rounded-full bg-red-500/80"></span>
+                  <span class="h-3 w-3 rounded-full bg-amber-500/80"></span>
+                  <span class="h-3 w-3 rounded-full bg-emerald-500/80"></span>
+                  <span class="text-zinc-400 ml-2">aeoncore-ingest-node :: ern43</span>
+                </div>
+                <span class="rounded bg-emerald-500/15 px-2 py-0.5 text-emerald-400 font-bold border border-emerald-500/30 flex items-center gap-1.5">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE
+                </span>
+              </div>
+
+              <!-- Terminal Live Payload -->
+              <div class="space-y-4 font-mono text-xs">
+                
+                <div class="text-zinc-400">// Active Sovereign Release Ingestion:</div>
+                
+                <div class="rounded-xl bg-obsidian/90 p-4 border border-border/60 space-y-2">
+                  <div class="flex justify-between items-center text-zinc-300">
+                    <span class="text-zinc-500">RELEASE:</span>
+                    <span class="font-bold text-white">"QuietWave Series Vol. 1"</span>
+                  </div>
+                  <div class="flex justify-between items-center text-zinc-300">
+                    <span class="text-zinc-500">CATALOG UPC:</span>
+                    <span class="text-ember font-bold">198003661148</span>
+                  </div>
+                  <div class="flex justify-between items-center text-zinc-300">
+                    <span class="text-zinc-500">VINYL EDITION:</span>
+                    <span class="text-zinc-300">12" LP elasticStage #20678</span>
+                  </div>
+                  <div class="flex justify-between items-center text-zinc-300">
+                    <span class="text-zinc-500">DPID ISSUER:</span>
+                    <span class="text-cyan font-bold">PADPIDA-AONCORE</span>
+                  </div>
+                </div>
+
+                <!-- Cryptographic Fingerprint Box -->
+                <div class="rounded-xl bg-surface/90 p-3.5 border border-border/60 space-y-1.5 text-[11px]">
+                  <div class="text-zinc-400 uppercase tracking-wider text-[10px] font-bold">Cryptographic Fingerprint:</div>
+                  <div class="truncate text-zinc-300 font-mono text-[10px]">
+                    SHA-256: <span class="text-emerald-400">8a71c9b2e04f9812df7183e8fa91...</span>
+                  </div>
+                  <div class="truncate text-zinc-300 font-mono text-[10px]">
+                    IPFS CID: <span class="text-ember">bafybeic94f71a082...</span>
+                  </div>
+                </div>
+
+                <!-- Real-Time Target Dispatch Status -->
+                <div class="space-y-2 pt-2">
+                  <div class="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Direct Dispatch Targets:</div>
+                  <div class="grid grid-cols-2 gap-2 text-[11px]">
+                    <div class="flex items-center justify-between rounded-lg bg-surface/80 px-3 py-2 border border-border/40">
+                      <span class="text-zinc-300">Spotify Pipe</span>
+                      <span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> DELIVERED</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg bg-surface/80 px-3 py-2 border border-border/40">
+                      <span class="text-zinc-300">Apple Music</span>
+                      <span class="text-emerald-400 font-bold flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> DELIVERED</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg bg-surface/80 px-3 py-2 border border-border/40">
+                      <span class="text-zinc-300">YouTube Content ID</span>
+                      <span class="text-cyan font-bold flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3"></i> ACTIVE</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg bg-surface/80 px-3 py-2 border border-border/40">
+                      <span class="text-zinc-300">ÆonWave Mobile</span>
+                      <span class="text-ember font-bold flex items-center gap-1"><i data-lucide="zap" class="w-3 h-3"></i> 24-BIT HLS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Simulate Dispatch Button -->
+                <button onclick="triggerDispatchSimulation()" id="simulate-btn" class="w-full rounded-xl bg-obsidian border border-ember/50 py-3 text-xs font-bold text-ember hover:bg-ember hover:text-white transition-all shadow-lg flex items-center justify-center gap-2">
+                  <i data-lucide="refresh-cw" class="w-4 h-4 animate-spin-slow"></i>
+                  <span>Simulate Real-Time DDEX ERN Ingestion</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE AUDIOPHILE SONIC STATION & 3D VINYL -->
+    <section id="station" class="relative py-24 bg-surface/60 border-y border-border/80">
+      <div class="mx-auto max-w-7xl px-6">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span class="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-3 py-1 text-xs font-mono text-cyan">
+            <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i> LIVE AUDIOPHILE WORKSTATION
+          </span>
+          <h2 class="font-syne text-4xl sm:text-5xl font-extrabold text-white">
+            High-Fidelity Master Station
           </h2>
-          <p class="text-sm text-zinc-400 leading-relaxed">
-            The originator of QuietWave. Directed by Lee-Wesley Smith III (Northwest / Mason Dixon), Fr.SW operates its entire 15-release discography, publishing (Easterwood Publishing EWP/BMI), and 12" vinyl pressings through the ÆonCore DnD pipeline.
+          <p class="text-zinc-400 text-sm font-light">
+            Experience uncompressed 24-bit/96kHz soundscapes directly from Fr.SW masters. Integrated Web Audio visualizer, live audio playback, and 12" vinyl physical provenance.
           </p>
-          <div class="pt-2 flex flex-wrap gap-3 text-xs font-mono">
-            <a href="https://frsw.media" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded bg-surface border border-border px-4 py-2 text-white hover:border-ember transition-all">
-              <span>Visit frsw.media</span>
-              <span>↗</span>
-            </a>
-            <a href="https://soundcloud.com/pages/vinyl-studio/20678" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded bg-ember/20 border border-ember/40 px-4 py-2 text-ember hover:bg-ember hover:text-white transition-all">
-              <span>12" Vinyl Release #20678 ($38.90)</span>
-            </a>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- 3D Spinning Vinyl Visualizer -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative group cursor-pointer" onclick="toggleVinylSpin()">
+              
+              <!-- Outer Glow -->
+              <div class="absolute inset-0 bg-ember/20 rounded-full blur-3xl group-hover:bg-ember/35 transition-all"></div>
+
+              <!-- Vinyl Disc -->
+              <div id="vinyl-disc" class="relative h-80 w-80 sm:h-96 sm:w-96 rounded-full vinyl-record border-4 border-zinc-800 flex items-center justify-center shadow-2xl transition-transform duration-1000 animate-spin-slow">
+                
+                <!-- Sheen Reflection Overlay -->
+                <div class="absolute inset-0 rounded-full vinyl-sheen pointer-events-none"></div>
+
+                <!-- Vinyl Center Label -->
+                <div class="relative h-32 w-32 rounded-full bg-carbon border-4 border-ember flex flex-col items-center justify-center text-center p-3 shadow-inner">
+                  <div class="h-3 w-3 rounded-full bg-zinc-900 border border-zinc-700 mb-1"></div>
+                  <div class="font-syne text-[10px] font-bold text-white tracking-widest">ÆONCORE</div>
+                  <div class="text-[8px] font-mono text-ember font-bold">FR-SW01-LP</div>
+                  <div class="text-[7px] font-mono text-zinc-400">33⅓ RPM • STEREO</div>
+                </div>
+              </div>
+
+              <!-- Badge below vinyl -->
+              <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-border bg-obsidian/90 px-4 py-1 text-[11px] font-mono text-zinc-400 whitespace-nowrap shadow-lg flex items-center gap-1.5">
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-ember"></i>
+                <span>Click Disc to Pause/Play Spin</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Master Player & Stem Station -->
+          <div class="lg:col-span-7 glass-card rounded-2xl p-8 border-border">
+            
+            <div class="flex items-center justify-between border-b border-border/80 pb-5 mb-6">
+              <div>
+                <span class="text-xs font-mono text-ember uppercase font-bold tracking-wider">Now Previewing Master</span>
+                <h3 id="current-track-title" class="text-2xl font-display font-bold text-white mt-1">
+                  01. Northwest — "Cyber Mason Chiaroscuro"
+                </h3>
+                <div id="current-track-meta" class="text-xs font-mono text-zinc-400 mt-1">
+                  Format: 24-bit / 96kHz Lossless WAV • ISRC: US-FRS-26-00001
+                </div>
+              </div>
+
+              <!-- Animated Equalizer Graphic -->
+              <div class="flex items-end gap-1 h-8 px-2" id="live-eq">
+                <span class="w-1 bg-ember rounded-t h-4 animate-bounce" style="animation-delay: 0.1s;"></span>
+                <span class="w-1 bg-cyan rounded-t h-7 animate-bounce" style="animation-delay: 0.3s;"></span>
+                <span class="w-1 bg-violet rounded-t h-3 animate-bounce" style="animation-delay: 0.2s;"></span>
+                <span class="w-1 bg-emerald-400 rounded-t h-6 animate-bounce" style="animation-delay: 0.4s;"></span>
+                <span class="w-1 bg-amber-400 rounded-t h-5 animate-bounce" style="animation-delay: 0.25s;"></span>
+              </div>
+            </div>
+
+            <!-- Canvas Frequency Spectrogram -->
+            <div class="bg-obsidian/90 rounded-xl p-4 border border-border/60 mb-6">
+              <canvas id="spectrogram-canvas" class="w-full h-20 rounded"></canvas>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="flex items-center justify-between gap-6 mb-8">
+              <button onclick="prevTrack()" class="p-2.5 rounded-xl border border-border bg-surface text-zinc-300 hover:text-white hover:border-zinc-500 transition-all">
+                <i data-lucide="skip-back" class="w-5 h-5"></i>
+              </button>
+
+              <button onclick="toggleMusicPlayback()" id="main-play-btn" class="flex-1 py-3.5 rounded-xl bg-gradient-to-r from-ember to-amber-500 font-display font-bold text-white shadow-xl shadow-ember/25 hover:from-ember-light hover:to-amber-400 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="play" id="main-play-icon" class="w-5 h-5 fill-white"></i>
+                <span id="main-play-text">Stream Master Audio</span>
+              </button>
+
+              <button onclick="nextTrack()" class="p-2.5 rounded-xl border border-border bg-surface text-zinc-300 hover:text-white hover:border-zinc-500 transition-all">
+                <i data-lucide="skip-forward" class="w-5 h-5"></i>
+              </button>
+            </div>
+
+            <!-- Tracklist Selector Grid -->
+            <div class="space-y-2.5 font-mono text-xs">
+              <div class="text-[11px] text-zinc-500 font-bold uppercase tracking-wider mb-2">Fr.SW Catalog Selection:</div>
+
+              <div onclick="selectTrack(0)" class="track-row p-3 rounded-xl border border-ember/40 bg-surface/90 flex items-center justify-between cursor-pointer hover:border-ember transition-all">
+                <div class="flex items-center gap-3">
+                  <span class="text-ember font-bold">01</span>
+                  <span class="text-white font-medium">Northwest — "Cyber Mason Chiaroscuro"</span>
+                </div>
+                <span class="text-zinc-500 text-[10px]">Hip-Hop / Orchestral</span>
+              </div>
+
+              <div onclick="selectTrack(1)" class="track-row p-3 rounded-xl border border-border/60 bg-surface/50 flex items-center justify-between cursor-pointer hover:border-cyan transition-all">
+                <div class="flex items-center gap-3">
+                  <span class="text-cyan font-bold">02</span>
+                  <span class="text-zinc-300">ARIA³ — "Soulaani Harmonics Vol. 3"</span>
+                </div>
+                <span class="text-zinc-500 text-[10px]">Vocal Trio / Soul</span>
+              </div>
+
+              <div onclick="selectTrack(2)" class="track-row p-3 rounded-xl border border-border/60 bg-surface/50 flex items-center justify-between cursor-pointer hover:border-violet transition-all">
+                <div class="flex items-center gap-3">
+                  <span class="text-violet font-bold">03</span>
+                  <span class="text-zinc-300">MDX-III — "MPC Soulaani Faders"</span>
+                </div>
+                <span class="text-zinc-500 text-[10px]">Producer Beat Suite</span>
+              </div>
+
+              <div onclick="selectTrack(3)" class="track-row p-3 rounded-xl border border-border/60 bg-surface/50 flex items-center justify-between cursor-pointer hover:border-emerald-400 transition-all">
+                <div class="flex items-center gap-3">
+                  <span class="text-emerald-400 font-bold">04</span>
+                  <span class="text-zinc-300">KAFEYANI — "Espresso & Rain [Field Recording]"</span>
+                </div>
+                <span class="text-zinc-500 text-[10px]">Ambient / Binaural</span>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- 4 Roster Cards Showcase -->
-        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+      </div>
+    </section>
+
+    <!-- OFFICIAL FR.SW ROSTER SHOWCASE: Unmasked Masters -->
+    <section id="roster" class="relative py-28 cyber-grid">
+      <div class="mx-auto max-w-7xl px-6">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div class="space-y-3">
+            <span class="text-ember font-mono text-xs uppercase tracking-widest">Sovereign Roster Canon</span>
+            <h2 class="font-syne text-4xl sm:text-5xl font-extrabold text-white">
+              The Creative Architects
+            </h2>
+            <p class="text-zinc-400 text-sm max-w-xl font-light">
+              Every master on ÆonCore DnD is owned, watermarked, and cleared under sovereign publishing with immutable ISRC ledger tracking.
+            </p>
+          </div>
+
+          <a href="https://frsw.media" target="_blank" class="self-start md:self-auto rounded-xl border border-border bg-surface px-5 py-2.5 text-xs font-mono text-zinc-300 hover:border-ember hover:text-white transition-all flex items-center gap-2">
+            <span>Explore Full 15-Release Canon on FrSW</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-ember"></i>
+          </a>
+        </div>
+
+        <!-- 4 Roster Cards Grid with 3D Tilt Hover -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          <!-- Northwest -->
-          <div class="p-4 rounded-xl border border-border bg-panel flex items-center gap-4">
-            <img src="artist-northwest.jpg" alt="Northwest / Mason Dixon" class="h-20 w-20 rounded-lg object-cover grayscale border border-border">
-            <div>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-ember uppercase">Founder • Flagship</span>
-              <h4 class="font-display font-bold text-white text-base mt-1">Northwest / Mason Dixon</h4>
-              <p class="text-[11px] text-zinc-400 font-mono mt-0.5">Casey Jones Vigilante Mask</p>
+          <!-- Northwest (Mason Dixon) -->
+          <div class="glass-card rounded-2xl overflow-hidden group">
+            <div class="relative aspect-square overflow-hidden bg-obsidian">
+              <img src="artist-northwest.jpg" alt="Northwest Portrait" class="h-full w-full object-cover grayscale contrast-125 group-hover:scale-105 group-hover:contrast-150 transition-all duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 left-3 rounded bg-ember/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+                Founder • Master MC
+              </span>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-display text-xl font-bold text-white group-hover:text-ember transition-colors">
+                Northwest / Mason Dixon
+              </h3>
+              <p class="text-xs text-zinc-400 font-mono">
+                Official unmasked executive studio portrait. Executive producer & lyricist.
+              </p>
+              <div class="pt-2 text-[11px] font-mono text-ember flex items-center justify-between border-t border-border/40">
+                <span>11 Albums Cleared</span>
+                <span>US-FRS Root</span>
+              </div>
             </div>
           </div>
 
           <!-- MDX-III -->
-          <div class="p-4 rounded-xl border border-border bg-panel flex items-center gap-4">
-            <img src="artist-mdx.jpg" alt="MDX-III" class="h-20 w-20 rounded-lg object-cover grayscale border border-border">
-            <div>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-ember uppercase">Alias • Rhythm-Forward</span>
-              <h4 class="font-display font-bold text-white text-base mt-1">MDX-III</h4>
-              <p class="text-[11px] text-zinc-400 font-mono mt-0.5">Soulaani MPC Producer</p>
+          <div class="glass-card rounded-2xl overflow-hidden group">
+            <div class="relative aspect-square overflow-hidden bg-obsidian">
+              <img src="artist-mdx.jpg" alt="MDX-III Portrait" class="h-full w-full object-cover grayscale contrast-125 group-hover:scale-105 group-hover:contrast-150 transition-all duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 left-3 rounded bg-cyan/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono font-bold text-black uppercase tracking-wider">
+                Producer • Sound Designer
+              </span>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-display text-xl font-bold text-white group-hover:text-cyan transition-colors">
+                MDX-III
+              </h3>
+              <p class="text-xs text-zinc-400 font-mono">
+                Soulaani music producer, MPC sampler maestro, acoustic architect.
+              </p>
+              <div class="pt-2 text-[11px] font-mono text-cyan flex items-center justify-between border-t border-border/40">
+                <span>Drum & Stem Ingest</span>
+                <span>24-bit 96kHz</span>
+              </div>
             </div>
           </div>
 
           <!-- ARIA³ -->
-          <div class="p-4 rounded-xl border border-border bg-panel flex items-center gap-4">
-            <img src="artist-aria.jpg" alt="ARIA³" class="h-20 w-20 rounded-lg object-cover grayscale border border-border">
-            <div>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-ember uppercase">Alias • Vocal-Led</span>
-              <h4 class="font-display font-bold text-white text-base mt-1">ARIA³</h4>
-              <p class="text-[11px] text-zinc-400 font-mono mt-0.5">Trio: Breya, Sariah, Leanea</p>
+          <div class="glass-card rounded-2xl overflow-hidden group">
+            <div class="relative aspect-square overflow-hidden bg-obsidian">
+              <img src="artist-aria.jpg" alt="ARIA³ Portrait" class="h-full w-full object-cover grayscale contrast-125 group-hover:scale-105 group-hover:contrast-150 transition-all duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 left-3 rounded bg-violet/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono font-bold text-white uppercase tracking-wider">
+                Vocal Trio • Harmonics
+              </span>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-display text-xl font-bold text-white group-hover:text-violet transition-colors">
+                ARIA³
+              </h3>
+              <p class="text-xs text-zinc-400 font-mono">
+                Breya, Sariah & Leanea. Soulaani, Latina, and Filipina harmonic blend.
+              </p>
+              <div class="pt-2 text-[11px] font-mono text-violet flex items-center justify-between border-t border-border/40">
+                <span>Studio Condenser</span>
+                <span>Multi-Stem</span>
+              </div>
             </div>
           </div>
 
           <!-- KAFEYANI -->
-          <div class="p-4 rounded-xl border border-border bg-panel flex items-center gap-4">
-            <img src="artist-kafeyani-cafe.jpg" alt="KAFEYANI" class="h-20 w-20 rounded-lg object-cover grayscale border border-border">
-            <div>
-              <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-ember uppercase">Alias • Atmospheric</span>
-              <h4 class="font-display font-bold text-white text-base mt-1">KAFEYANI</h4>
-              <p class="text-[11px] text-zinc-400 font-mono mt-0.5">Artisanal Café Roomtone</p>
+          <div class="glass-card rounded-2xl overflow-hidden group">
+            <div class="relative aspect-square overflow-hidden bg-obsidian">
+              <img src="artist-kafeyani.jpg" alt="KAFEYANI Portrait" class="h-full w-full object-cover grayscale contrast-125 group-hover:scale-105 group-hover:contrast-150 transition-all duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-transparent opacity-80"></div>
+              <span class="absolute top-3 left-3 rounded bg-emerald-400/90 backdrop-blur-md px-2.5 py-1 text-[10px] font-mono font-bold text-black uppercase tracking-wider">
+                Ambient • Atmospheric
+              </span>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-display text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                KAFEYANI
+              </h3>
+              <p class="text-xs text-zinc-400 font-mono">
+                Mid-20s Soulaani/Latino sound architect. Field recordings & coffeehouse textures.
+              </p>
+              <div class="pt-2 text-[11px] font-mono text-emerald-400 flex items-center justify-between border-t border-border/40">
+                <span>Binaural Ambient</span>
+                <span>Analog Tape</span>
+              </div>
             </div>
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- THE REVENUE INVERSION CALCULATOR: Interactive Slider -->
+    <section id="inversion" class="relative py-28 bg-surface/70 border-t border-border/80">
+      <div class="mx-auto max-w-5xl px-6">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span class="text-emerald-400 font-mono text-xs uppercase tracking-widest font-bold">The Sovereign Math</span>
+          <h2 class="font-syne text-4xl sm:text-5xl font-extrabold text-white">
+            The Revenue Inversion
+          </h2>
+          <p class="text-zinc-400 text-sm font-light">
+            Traditional streaming forces artists to compete for pennies in an algorithmic lottery. 
+            ÆonCore DnD inverts the pyramid with direct listener patronage and 100% margin settlement.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 sm:p-12 border-border space-y-10">
+          
+          <!-- Slider Control -->
+          <div class="space-y-4">
+            <div class="flex justify-between items-center text-sm font-mono">
+              <label for="patron-slider" class="text-zinc-300 font-bold uppercase tracking-wider">
+                Select Your Direct Patrons / Dedicated Listeners:
+              </label>
+              <span id="patron-count-display" class="text-2xl font-display font-bold text-ember">
+                100 Patrons
+              </span>
+            </div>
+
+            <input type="range" id="patron-slider" min="10" max="1000" step="10" value="100" oninput="updateCalculator(this.value)" class="w-full h-3 bg-obsidian rounded-lg appearance-none cursor-pointer accent-ember">
+
+            <div class="flex justify-between text-[11px] font-mono text-zinc-500">
+              <span>10 Patrons (Genesis)</span>
+              <span>250 Patrons</span>
+              <span>500 Patrons</span>
+              <span>1,000 Patrons (Scale)</span>
+            </div>
+          </div>
+
+          <!-- Comparison Display Cards -->
+          <div class="grid md:grid-cols-2 gap-8 items-stretch pt-4">
+            
+            <!-- Legacy Distributor Model (The Broken Pipeline) -->
+            <div class="rounded-2xl border border-red-500/30 bg-obsidian/80 p-6 flex flex-col justify-between space-y-6">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono text-red-400 mb-2">
+                  <span>LEGACY STREAMING MODEL</span>
+                  <span class="bg-red-950/60 px-2 py-0.5 rounded border border-red-500/30">90-DAY ESCROW</span>
+                </div>
+                <div class="text-zinc-400 text-xs font-mono">Est. Streams Needed for Equivalent Income:</div>
+                <div id="legacy-streams-needed" class="text-3xl font-display font-bold text-white mt-1">
+                  6,000,000 Streams
+                </div>
+              </div>
+
+              <div class="border-t border-border/40 pt-4 space-y-2 text-xs font-mono text-zinc-400">
+                <div class="flex justify-between">
+                  <span>Payout Rate:</span>
+                  <span class="text-zinc-300">~$0.003 / stream</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Distributor Annual Fee:</span>
+                  <span class="text-red-400">-$20 to -$150/yr</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Audience Ownership:</span>
+                  <span class="text-red-400">0% (DSP owns listener)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ÆonCore DnD Sovereign Core -->
+            <div class="rounded-2xl border-2 border-ember bg-gradient-to-b from-surface to-panel p-6 flex flex-col justify-between space-y-6 shadow-xl shadow-ember/15 relative overflow-hidden">
+              <div class="absolute top-0 right-0 bg-ember text-white text-[10px] font-mono font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                Direct Sovereignty
+              </div>
+
+              <div>
+                <div class="text-xs font-mono text-ember mb-2 font-bold uppercase tracking-wider">
+                  ÆonCore DnD Direct Annual Earnings
+                </div>
+                <div id="aeoncore-annual-payout" class="text-4xl font-display font-extrabold text-white mt-1">
+                  $18,000 / Year
+                </div>
+                <div class="text-xs font-mono text-emerald-400 mt-1 flex items-center gap-1.5">
+                  <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                  <span>Real-Time Webster/Rho Treasury Clearance</span>
+                </div>
+              </div>
+
+              <div class="border-t border-border/80 pt-4 space-y-2 text-xs font-mono text-zinc-300">
+                <div class="flex justify-between">
+                  <span>100% Patron Membership:</span>
+                  <span class="text-white font-bold">$10–$20/mo per patron</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Digital Vinyl & Master Bundles:</span>
+                  <span class="text-white font-bold">$24.99 direct sale</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Distributor Toll:</span>
+                  <span class="text-emerald-400 font-bold">0.00%</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- The Inversion Math (Economics vs. DistroKid) -->
-  <section id="economics" class="py-24 border-b border-border/60 bg-carbon">
-    <div class="mx-auto max-w-5xl px-6 text-center">
-      <span class="text-ember font-mono text-xs uppercase tracking-widest">Financial Sovereignty</span>
-      <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-2 mb-6">
-        The Sovereign Inversion Math
-      </h2>
-      <p class="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto mb-12">
-        Why chase millions of fractional-penny streams on DSPs when direct sovereign relationships generate 100× the revenue?
-      </p>
-
-      <div class="grid md:grid-cols-2 gap-8 text-left">
-        <!-- Legacy Aggregator Model -->
-        <div class="p-8 rounded-2xl border border-red-500/20 bg-panel/50 space-y-5">
-          <div class="inline-block text-xs font-mono text-red-400 uppercase font-bold tracking-wider">
-            Traditional Aggregator Pipeline
-          </div>
-          <div class="text-3xl font-display font-bold text-zinc-300">
-            1,000,000 DSP Streams
-          </div>
-          <div class="text-2xl font-mono text-zinc-400">
-            ≈ $3,500 Gross
-          </div>
-          <ul class="text-xs font-mono space-y-2 text-zinc-400">
-            <li>• 60 to 90 days delayed payout cycles</li>
-            <li>• Middleman fees & foreign exchange cuts</li>
-            <li>• Zero listener email or phone access</li>
-            <li>• Vulnerable to automated distributor account lockouts</li>
-          </ul>
+    <!-- INGESTION DOCKET & RAW DDEX XML VIEWER -->
+    <section id="docket" class="py-24 cyber-grid">
+      <div class="mx-auto max-w-4xl px-6">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">Architecture Inspection</span>
+          <h2 class="font-syne text-3xl sm:text-4xl font-extrabold text-white">
+            Direct DDEX ERN 4.3 Manifest
+          </h2>
+          <p class="text-zinc-400 text-sm font-light">
+            View the exact cryptographic release XML packet dispatched directly to DSP ingestion endpoints.
+          </p>
         </div>
 
-        <!-- ÆonCore Sovereign Model -->
-        <div class="p-8 rounded-2xl border border-ember bg-surface/90 shadow-2xl ember-glow-box space-y-5">
-          <div class="inline-block text-xs font-mono text-ember uppercase font-bold tracking-wider">
-            ÆonCore Sovereign Distribution Core
+        <!-- XML Modal Card -->
+        <div class="glass-card rounded-2xl p-6 border-border font-mono text-xs space-y-4">
+          <div class="flex items-center justify-between border-b border-border/80 pb-3">
+            <span class="text-zinc-400 flex items-center gap-2">
+              <i data-lucide="file-code" class="w-4 h-4 text-amber-400"></i>
+              <span>frsw_release_packet_ern43.xml</span>
+            </span>
+            <button onclick="copyDdexXml()" class="text-xs text-ember hover:text-white transition-colors flex items-center gap-1">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy XML
+            </button>
           </div>
-          <div class="text-3xl font-display font-bold text-white">
-            100 Dedicated Patrons
-          </div>
-          <div class="text-2xl font-mono font-bold text-ember">
-            $15,000 – $24,000 / Year
-          </div>
-          <ul class="text-xs font-mono space-y-2 text-zinc-300">
-            <li>• Real-time automated bank clearing (Webster/Rho)</li>
-            <li>• 100% direct listener ownership & communication</li>
-            <li>• Digital vinyl ($24.99) & physical 12" LP pre-orders</li>
-            <li>• DSPs used strictly as zero-cost promotional funnels</li>
-          </ul>
+
+          <pre class="bg-obsidian/90 rounded-xl p-5 overflow-x-auto text-zinc-300 text-[11px] leading-relaxed border border-border/40 max-h-64 scrollbar-thin">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ern:NewReleaseMessage xmlns:ern="http://ddex.net/xml/ern/43"&gt;
+  &lt;MessageHeader&gt;
+    &lt;MessageId&gt;AONCORE-2026-FRSW-001&lt;/MessageId&gt;
+    &lt;MessageSender&gt;
+      &lt;PartyId namespace="DPID"&gt;PADPIDA-AONCORE&lt;/PartyId&gt;
+      &lt;PartyName&gt;&lt;FullName&gt;ÆonCore Digital Distribution&lt;/FullName&gt;&lt;/PartyName&gt;
+    &lt;/MessageSender&gt;
+    &lt;MessageRecipient&gt;
+      &lt;PartyId namespace="DPID"&gt;PADPIDA-SPOTIFY&lt;/PartyId&gt;
+    &lt;/MessageRecipient&gt;
+    &lt;MessageCreatedDateTime&gt;2026-10-28T18:30:00Z&lt;/MessageCreatedDateTime&gt;
+  &lt;/MessageHeader&gt;
+  &lt;ReleaseList&gt;
+    &lt;Release&gt;
+      &lt;ReleaseId&gt;
+        &lt;ICPN IsAlternative="false"&gt;198003661148&lt;/ICPN&gt;
+        &lt;CatalogNumber&gt;FR-SW01-LP&lt;/CatalogNumber&gt;
+      &lt;/ReleaseId&gt;
+      &lt;ReferenceTitle&gt;&lt;TitleText&gt;QuietWave Series Vol. 1&lt;/TitleText&gt;&lt;/ReferenceTitle&gt;
+      &lt;ReleaseLabelReference&gt;Fr. Sandtown-Winchester&lt;/ReleaseLabelReference&gt;
+      &lt;PLine&gt;&lt;Year&gt;2026&lt;/Year&gt;&lt;PLineText&gt;Fr. Sandtown-Winchester / EVMG Enterprises&lt;/PLineText&gt;&lt;/PLine&gt;
+      &lt;CLine&gt;&lt;Year&gt;2026&lt;/Year&gt;&lt;CLineText&gt;Easterwood Publishing LLC&lt;/CLineText&gt;&lt;/CLine&gt;
+    &lt;/Release&gt;
+  &lt;/ReleaseList&gt;
+&lt;/ern:NewReleaseMessage&gt;</pre>
         </div>
+
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Ingestion Docket & Contact Onboarding -->
-  <section id="onboard" class="py-24 bg-surface/60">
-    <div class="mx-auto max-w-3xl px-6 text-center">
-      <span class="text-ember font-mono text-xs uppercase tracking-widest">Enterprise Access</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
-        Onboard Your Catalog to ÆonCore DnD
-      </h2>
-      <p class="text-zinc-400 text-sm mb-10">
-        Initiate direct DDEX ERN release routing, in-house ISRC allocation, or catalog migration.
-      </p>
+    <!-- ONBOARDING FORM SECTION -->
+    <section id="onboard" class="py-24 bg-surface/70 border-t border-border">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <span class="text-ember font-mono text-xs uppercase tracking-widest font-bold">Enterprise Access</span>
+        <h2 class="font-syne text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4">
+          Onboard Your Master Catalog
+        </h2>
+        <p class="text-zinc-400 text-sm mb-10 font-light">
+          Connect your catalog directly to ÆonCore DnD. Zero distributor cut, direct DDEX ERN 4.3 routing, and instant treasury settlements.
+        </p>
 
-      <form class="rounded-2xl border border-border bg-panel p-8 text-left space-y-5 text-sm font-mono shadow-2xl">
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs text-zinc-400 mb-1">Entity / Label Name</label>
-            <input type="text" value="Fr. Sandtown-Winchester" class="w-full rounded bg-surface border border-border px-3 py-2 text-white focus:border-ember outline-none">
+        <form onsubmit="handleOnboardSubmit(event)" class="glass-card rounded-2xl p-8 sm:p-10 text-left space-y-6 text-sm font-mono shadow-2xl">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs text-zinc-400 mb-2">Entity / Record Label</label>
+              <input type="text" id="form-label" value="Fr. Sandtown-Winchester" required class="w-full rounded-xl bg-obsidian border border-border px-4 py-3 text-white focus:border-ember outline-none transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs text-zinc-400 mb-2">Executive Managing Principal</label>
+              <input type="text" id="form-name" value="Lee-Wesley Smith III" required class="w-full rounded-xl bg-obsidian border border-border px-4 py-3 text-white focus:border-ember outline-none transition-colors">
+            </div>
           </div>
-          <div>
-            <label class="block text-xs text-zinc-400 mb-1">Managing Representative</label>
-            <input type="text" value="Lee-Wesley Smith III" class="w-full rounded bg-surface border border-border px-3 py-2 text-white focus:border-ember outline-none">
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs text-zinc-400 mb-2">Official Contact Email</label>
+              <input type="email" id="form-email" value="masondixon@evmg.media" required class="w-full rounded-xl bg-obsidian border border-border px-4 py-3 text-white focus:border-ember outline-none transition-colors">
+            </div>
+            <div>
+              <label class="block text-xs text-zinc-400 mb-2">Active Catalog Size</label>
+              <input type="text" id="form-catalog" value="15 Verified Releases / 11 LPs" required class="w-full rounded-xl bg-obsidian border border-border px-4 py-3 text-white focus:border-ember outline-none transition-colors">
+            </div>
           </div>
-        </div>
 
-        <div class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs text-zinc-400 mb-1">Official Contact Email</label>
-            <input type="email" value="masondixon@evmg.media" class="w-full rounded bg-surface border border-border px-3 py-2 text-white focus:border-ember outline-none">
+            <label class="block text-xs text-zinc-400 mb-2">Primary Ingestion Mode</label>
+            <select class="w-full rounded-xl bg-obsidian border border-border px-4 py-3 text-white focus:border-ember outline-none transition-colors">
+              <option>Direct DDEX ERN 4.3 XML + Real-Time Treasury Clearing</option>
+              <option>Zero-Loss Migration from DistroKid / TuneCore (Retain All Stream Counts)</option>
+              <option>ÆonWave Audiophile Mobile Ingestion Only (FLAC 24-bit/96kHz)</option>
+            </select>
           </div>
-          <div>
-            <label class="block text-xs text-zinc-400 mb-1">Catalog Size (Tracks/Albums)</label>
-            <input type="text" value="15 Verified Releases / 11 LPs" class="w-full rounded bg-surface border border-border px-3 py-2 text-white focus:border-ember outline-none">
-          </div>
-        </div>
 
-        <div>
-          <label class="block text-xs text-zinc-400 mb-1">Routing Mode</label>
-          <select class="w-full rounded bg-surface border border-border px-3 py-2 text-white focus:border-ember outline-none">
-            <option>Direct DDEX ERN 4.3 Pipe + Treasury Settlement</option>
-            <option>Catalog Migration from DistroKid / TuneCore (Zero Stream Loss)</option>
-            <option>ÆonWave Audiophile Mobile Ingestion Only</option>
-          </select>
-        </div>
+          <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-ember to-amber-500 py-4 font-display font-bold text-white text-base shadow-xl shadow-ember/25 hover:from-ember-light hover:to-amber-400 transition-all flex items-center justify-center gap-2">
+            <span>Transmit Ingestion Docket</span>
+            <i data-lucide="send" class="w-4 h-4"></i>
+          </button>
+        </form>
+      </div>
+    </section>
 
-        <button type="button" onclick="alert('Ingestion docket confirmed. Manifest mapped to C:\\AlignDrive\\AlignDrive_Fr.SW\\05_Tech_Infrastructure\\aeoncore_sovereign_catalog_manifest.json');" class="w-full rounded bg-ember py-3 font-bold text-white shadow-lg shadow-ember/25 hover:bg-ember/90 transition-all">
-          Submit Ingestion Docket →
-        </button>
-      </form>
-    </div>
-  </section>
+    <!-- FOOTER -->
+    <footer class="border-t border-border bg-obsidian py-14 text-center text-xs font-mono text-zinc-500 space-y-3">
+      <div class="font-syne text-white font-bold text-base tracking-wider flex items-center justify-center gap-2">
+        <span>ÆONCORE DIGITAL DISTRIBUTION (ÆONCORE DnD)</span>
+      </div>
+      <p class="text-zinc-400">A Sovereign Digital Distribution Infrastructure Node of EVMG Enterprises LLC</p>
+      <p>Governance: S&P Union Trust • Publishing: Easterwood Publishing LLC (BMI) • Treasury: Webster Bank / Rho</p>
+      <div class="flex justify-center gap-6 pt-3 text-[11px] text-zinc-400">
+        <a href="https://frsw.media" target="_blank" class="hover:text-ember transition-colors">Fr.SW Portal</a>
+        <span>•</span>
+        <a href="#pipeline" class="hover:text-ember transition-colors">DDEX ERN 4.3</a>
+        <span>•</span>
+        <a href="#roster" class="hover:text-ember transition-colors">Verified Roster</a>
+        <span>•</span>
+        <a href="#station" class="hover:text-ember transition-colors">Sonic Station</a>
+      </div>
+      <p class="text-[10px] text-zinc-600 pt-4">© 2026 EVMG Enterprises LLC. All Rights Reserved. Sovereign Architecture.</p>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="border-t border-border bg-carbon py-12 text-center text-xs font-mono text-zinc-500 space-y-2">
-    <div class="font-display text-white font-bold text-sm tracking-wider">ÆONCORE DIGITAL DISTRIBUTION (ÆONCORE DnD)</div>
-    <p>A Sovereign Digital Distribution Infrastructure Node of EVMG Enterprises LLC</p>
-    <p>Governance: S&P Union Trust • Publishing: Easterwood Publishing (EWP/BMI) • Treasury: Webster Bank / Rho</p>
-    <p class="text-[10px] text-zinc-600 pt-4">© 2026 EVMG Enterprises LLC. All Rights Reserved. Built with Lunar Carbon Architecture.</p>
-  </footer>
+  </div>
+
+  <!-- Sound Engine & Interactive Script -->
+  <script>
+    // Lucide Icons init
+    lucide.createIcons();
+
+    // 1. Interactive Background Canvas (Audio wavefield particle network)
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 140 };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initParticles();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.8;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = (Math.random() - 0.5) * 0.6;
+        this.color = Math.random() > 0.4 ? 'rgba(255, 85, 0, ' : 'rgba(0, 245, 212, ';
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + (this.size * 0.3) + ')';
+        ctx.fill();
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < mouse.radius) {
+            let force = (mouse.radius - distance) / mouse.radius;
+            this.x -= (dx / distance) * force * 3;
+            this.y -= (dy / distance) * force * 3;
+          }
+        }
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.floor((width * height) / 14000);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.12 - dist / 1000})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    resizeCanvas();
+    animateParticles();
+
+    // 2. Web Audio Synthesizer & Sound FX Engine
+    let audioCtx = null;
+    let isSoundEnabled = true;
+    let isMusicPlaying = false;
+    let activeOscillators = [];
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playUiSound(freq = 440, type = 'sine', duration = 0.08) {
+      if (!isSoundEnabled) return;
+      initAudio();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      isSoundEnabled = !isSoundEnabled;
+      const label = document.getElementById('sound-label');
+      const icon = document.getElementById('sound-icon');
+      if (isSoundEnabled) {
+        label.innerText = 'SOUND FX: ON';
+        icon.innerHTML = '<i data-lucide="volume-2" class="w-3.5 h-3.5"></i>';
+        playUiSound(580, 'sine', 0.1);
+      } else {
+        label.innerText = 'SOUND FX: MUTED';
+        icon.innerHTML = '<i data-lucide="volume-x" class="w-3.5 h-3.5"></i>';
+        if (isMusicPlaying) toggleMusicPlayback();
+      }
+      lucide.createIcons();
+    }
+
+    // 3. Ambient Master Synthesizer (Live Sound Station)
+    const tracks = [
+      {
+        title: "01. Northwest — 'Cyber Mason Chiaroscuro'",
+        meta: "Format: 24-bit / 96kHz Lossless WAV • ISRC: US-FRS-26-00001",
+        chords: [130.81, 164.81, 196.00], // C minor vibe
+        bpm: 88
+      },
+      {
+        title: "02. ARIA³ — 'Soulaani Harmonics Vol. 3'",
+        meta: "Format: 24-bit / 96kHz Lossless FLAC • ISRC: US-FRS-26-00002",
+        chords: [146.83, 174.61, 220.00], // D minor soul
+        bpm: 96
+      },
+      {
+        title: "03. MDX-III — 'MPC Soulaani Faders'",
+        meta: "Format: 24-bit / 96kHz Multi-Stem Audio • ISRC: US-FRS-26-00003",
+        chords: [116.54, 138.59, 174.61], // Bb minor boom bap
+        bpm: 92
+      },
+      {
+        title: "04. KAFEYANI — 'Espresso & Rain [Field Recording]'",
+        meta: "Format: Binaural 3D Audio Stream • ISRC: US-FRS-26-00004",
+        chords: [110.00, 146.83, 164.81], // A minor ambient
+        bpm: 74
+      }
+    ];
+    let currentTrackIdx = 0;
+
+    function selectTrack(idx) {
+      currentTrackIdx = idx;
+      const t = tracks[idx];
+      document.getElementById('current-track-title').innerText = t.title;
+      document.getElementById('current-track-meta').innerText = t.meta;
+      playUiSound(600, 'triangle', 0.08);
+
+      document.querySelectorAll('.track-row').forEach((row, i) => {
+        if (i === idx) {
+          row.classList.add('border-ember', 'bg-surface/90');
+          row.classList.remove('border-border/60', 'bg-surface/50');
+        } else {
+          row.classList.remove('border-ember', 'bg-surface/90');
+          row.classList.add('border-border/60', 'bg-surface/50');
+        }
+      });
+
+      if (isMusicPlaying) {
+        stopSynthMusic();
+        startSynthMusic();
+      }
+    }
+
+    function toggleMusicPlayback() {
+      initAudio();
+      if (!isMusicPlaying) {
+        startSynthMusic();
+      } else {
+        stopSynthMusic();
+      }
+    }
+
+    function startSynthMusic() {
+      isMusicPlaying = true;
+      document.getElementById('main-play-text').innerText = 'Pause Master Audio';
+      document.getElementById('main-play-icon').setAttribute('data-lucide', 'pause');
+      lucide.createIcons();
+
+      // Start continuous ambient chords with sub-bass
+      const t = tracks[currentTrackIdx];
+      const gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gainNode.connect(audioCtx.destination);
+
+      activeOscillators = t.chords.map((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        osc.type = i === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.connect(gainNode);
+        osc.start();
+        return osc;
+      });
+
+      // Start vinyl disc fast spin
+      document.getElementById('vinyl-disc').style.animationDuration = '4s';
+    }
+
+    function stopSynthMusic() {
+      isMusicPlaying = false;
+      document.getElementById('main-play-text').innerText = 'Stream Master Audio';
+      document.getElementById('main-play-icon').setAttribute('data-lucide', 'play');
+      lucide.createIcons();
+
+      activeOscillators.forEach(osc => {
+        try { osc.stop(); } catch(e) {}
+      });
+      activeOscillators = [];
+      document.getElementById('vinyl-disc').style.animationDuration = '18s';
+    }
+
+    function prevTrack() {
+      currentTrackIdx = (currentTrackIdx - 1 + tracks.length) % tracks.length;
+      selectTrack(currentTrackIdx);
+    }
+    function nextTrack() {
+      currentTrackIdx = (currentTrackIdx + 1) % tracks.length;
+      selectTrack(currentTrackIdx);
+    }
+
+    function toggleVinylSpin() {
+      const disc = document.getElementById('vinyl-disc');
+      if (disc.style.animationPlayState === 'paused') {
+        disc.style.animationPlayState = 'running';
+        playUiSound(520, 'sine', 0.1);
+      } else {
+        disc.style.animationPlayState = 'paused';
+        playUiSound(340, 'sine', 0.1);
+      }
+    }
+
+    // 4. Live Spectrogram Canvas Renderer
+    const specCanvas = document.getElementById('spectrogram-canvas');
+    const specCtx = specCanvas.getContext('2d');
+    function drawSpectrogram() {
+      specCanvas.width = specCanvas.offsetWidth;
+      specCanvas.height = specCanvas.offsetHeight;
+      const bars = 48;
+      const barWidth = specCanvas.width / bars;
+
+      specCtx.clearRect(0, 0, specCanvas.width, specCanvas.height);
+      for (let i = 0; i < bars; i++) {
+        let height;
+        if (isMusicPlaying) {
+          height = Math.sin(Date.now() * 0.005 + i * 0.3) * 25 + Math.random() * 30 + 15;
+        } else {
+          height = Math.sin(Date.now() * 0.002 + i * 0.2) * 6 + 10;
+        }
+        const grad = specCtx.createLinearGradient(0, specCanvas.height, 0, 0);
+        grad.addColorStop(0, '#ff5500');
+        grad.addColorStop(0.5, '#9d4edd');
+        grad.addColorStop(1, '#00f5d4');
+        specCtx.fillStyle = grad;
+        specCtx.fillRect(i * barWidth, specCanvas.height - height, barWidth - 2, height);
+      }
+      requestAnimationFrame(drawSpectrogram);
+    }
+    drawSpectrogram();
+
+    // 5. Inversion Calculator Logic
+    function updateCalculator(patrons) {
+      document.getElementById('patron-count-display').innerText = `${patrons} Patrons`;
+      const annualDirect = patrons * 15 * 12; // $15/mo average
+      const streamsNeeded = Math.round(annualDirect / 0.003);
+
+      document.getElementById('aeoncore-annual-payout').innerText = `$${annualDirect.toLocaleString()} / Year`;
+      document.getElementById('legacy-streams-needed').innerText = `${streamsNeeded.toLocaleString()} Streams`;
+      playUiSound(440 + patrons * 0.5, 'sine', 0.02);
+    }
+
+    // 6. Simulate Dispatch Interaction
+    function triggerDispatchSimulation() {
+      playUiSound(700, 'sine', 0.15);
+      const btn = document.getElementById('simulate-btn');
+      btn.innerHTML = '<span class="text-emerald-400 font-bold flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4"></i> DISPATCH COMPLETE: 150+ DSPS SYNCHRONIZED</span>';
+      lucide.createIcons();
+      setTimeout(() => {
+        btn.innerHTML = '<i data-lucide="refresh-cw" class="w-4 h-4 animate-spin-slow"></i><span>Simulate Real-Time DDEX ERN Ingestion</span>';
+        lucide.createIcons();
+      }, 3500);
+    }
+
+    // 7. Copy DDEX XML
+    function copyDdexXml() {
+      playUiSound(880, 'sine', 0.1);
+      navigator.clipboard.writeText(`<?xml version="1.0" encoding="utf-8"?>\n<ern:NewReleaseMessage xmlns:ern="http://ddex.net/xml/ern/43">...`);
+      alert("DDEX ERN 4.3 XML release manifest copied to clipboard.");
+    }
+
+    function handleOnboardSubmit(e) {
+      e.preventDefault();
+      playUiSound(980, 'triangle', 0.25);
+      alert("Sovereign Ingestion Docket Transmitted to EVMG Corporate Treasury.\nManifest verified against C:\\AlignDrive\\AlignDrive_Fr.SW\\05_Tech_Infrastructure\\aeoncore_sovereign_catalog_manifest.json");
+    }
+  </script>
 
 </body>
 </html>
